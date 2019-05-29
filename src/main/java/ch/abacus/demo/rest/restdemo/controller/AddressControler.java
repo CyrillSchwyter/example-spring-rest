@@ -36,7 +36,6 @@ public class AddressControler {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-//    @Path("/")
     public Collection<Address> getAddresses() {
         return addressRepository.getAllAddresses();
     }
@@ -52,7 +51,6 @@ public class AddressControler {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-//    @Path("/")
     public Response saveAddress(Address address) {
         final Address save = addressRepository.save(address);
         return Response.status(Response.Status.CREATED)
