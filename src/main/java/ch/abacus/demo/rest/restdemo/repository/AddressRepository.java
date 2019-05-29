@@ -21,6 +21,14 @@ public class AddressRepository {
 
     }
 
+    public Address findById(Long id) {
+        return addresses.get(id);
+    }
+
+    public void delete(Long id) {
+        addresses.remove(id);
+    }
+
     private void fillWithTestData() {
 
         Address address = new Address();
@@ -33,8 +41,7 @@ public class AddressRepository {
 
     }
 
-
-    public Long save(Address address) {
+    public Address save(Address address) {
 
         boolean exits = addresses.containsKey(address.getId());
 
@@ -46,6 +53,6 @@ public class AddressRepository {
             address.setId(newId);
             addresses.put(newId, address);
         }
-        return address.getId();
+        return address;
     }
 }

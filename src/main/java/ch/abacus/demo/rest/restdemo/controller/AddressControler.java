@@ -5,10 +5,14 @@ import ch.abacus.demo.rest.restdemo.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 @Component
@@ -20,7 +24,7 @@ public class AddressControler {
 
 
     @GET
-    @Produces("text/plain")
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("/test")
     public String sayHello() {
 
@@ -28,20 +32,29 @@ public class AddressControler {
     }
 
     @GET
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/")
     public Collection<Address> getAddresses() {
         return addressRepository.getAllAddresses();
     }
 
     @GET
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{oid}")
     public Address getAddress(@PathParam("oid") Long id) {
 
-        Address address = new Address();
-        address.setId(id);
-        address.setName("Cyrill");
-        return address;
+        return addressRepository.findById(id);
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/")
+    public Response saveAddress(Address address) {
+        final Address save = addressRepository.save(address);
+        return Response.status(Response.Status.CREATED)
+                .entity(save)
+                .build();
+
     }
 }
