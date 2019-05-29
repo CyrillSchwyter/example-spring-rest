@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -37,6 +38,7 @@ public class AddressControler {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<Address> getAddresses() {
+
         return addressRepository.getAllAddresses();
     }
 
@@ -48,7 +50,7 @@ public class AddressControler {
         return addressRepository.findById(id);
     }
 
-    @POST
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveAddress(Address address) {
@@ -57,5 +59,13 @@ public class AddressControler {
                 .entity(save)
                 .build();
 
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/{oid}/name")
+    public String getName(@PathParam("oid") Long id) {
+
+        return addressRepository.findById(id).getName();
     }
 }
