@@ -10,5 +10,6 @@ public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
 
         register(AddressControler.class);
+        register(CorsResponseFilter.class);
     }
 }

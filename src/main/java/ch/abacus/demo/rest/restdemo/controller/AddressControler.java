@@ -4,6 +4,7 @@ import ch.abacus.demo.rest.restdemo.model.Address;
 import ch.abacus.demo.rest.restdemo.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -34,7 +35,6 @@ public class AddressControler {
 
         return "Hello du";
     }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<Address> getAddresses() {
@@ -49,7 +49,6 @@ public class AddressControler {
 
         return addressRepository.findById(id);
     }
-
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,7 +59,6 @@ public class AddressControler {
                 .build();
 
     }
-
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/{oid}/name")
