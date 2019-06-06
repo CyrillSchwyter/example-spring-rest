@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -24,16 +25,17 @@ public class AddressControler {
 
     private final AddressRepository addressRepository;
 
-    public AddressControler(@Autowired AddressRepository addressRepository) {
+    @Autowired
+    public AddressControler( AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_HTML)
     @Path("/test")
     public String sayHello() {
 
-        return "Hello du";
+        return "<h1>Hello du<h1>";
     }
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,4 +68,13 @@ public class AddressControler {
 
         return addressRepository.findById(id).getName();
     }
+
+    @DELETE
+    @Path("/{oid}")
+    public Response delete(@PathParam("oid") Long id) {
+        addressRepository.delete(id);
+        return Response.status(Response.Status.OK)
+                .build();
+    }
+
 }
