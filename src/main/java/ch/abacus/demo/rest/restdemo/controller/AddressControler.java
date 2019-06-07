@@ -4,6 +4,7 @@ import ch.abacus.demo.rest.restdemo.model.Address;
 import ch.abacus.demo.rest.restdemo.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -119,7 +120,7 @@ public class AddressControler {
         return addressRepository.findById(id).getCity();
     }
 
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveAddress(Address address) {
@@ -140,7 +141,7 @@ public class AddressControler {
         }
     }
 
-    @POST
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
