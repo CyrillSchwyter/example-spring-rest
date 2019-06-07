@@ -43,7 +43,7 @@ public class AddressControler {
 
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public Collection<Address> getAddresses(@QueryParam("name") String name,
                                             @QueryParam("surname") String surname,
                                             @QueryParam("zip") String zip,
